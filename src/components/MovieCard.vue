@@ -4,7 +4,7 @@
         <div class="py-6 cursor-pointer">
           <div
             :style="`background-image: url(https://image.tmdb.org/t/p/original/${movie.poster_path})`"
-            class="lg:w-[199px] lg:min-w-0 min-w-[48vw] h-[266px] rounded-[4px] bg-[#CEE8EF] bg-contain"
+            class="lg:w-[199px] lg:min-w-0 min-w-[40vw] h-[266px] rounded-[4px] bg-[#CEE8EF] bg-contain"
           ></div>
           <p class="font-semibold mt-3">{{movie.title}}</p>
           <p class="text-xs mt-2">

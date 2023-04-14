@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="grid gap-4 grid-cols-12" v-if="tabItem == 'cast'">
-        <div class=" col-span-6" v-for="(cast, index) in casts" :key="index">
+        <div class=" col-span-6 " v-for="(cast, index) in casts" :key="index">
             <cast-card :cast="cast" />
         </div>
     </div>

@@ -6,14 +6,14 @@
       <div class="flex">
         <img
           @click="scrollMovieLeft"
-          class="cursor-pointer"
+          class="cursor-pointer h-[14px] w-[14px]"
           src="../assets/arrow-left.svg"
           alt=""
         />
         <img
           src="../assets/arrow-right.svg"
           @click="scrollMovieRight"
-          class="ml-5 cursor-pointer"
+          class="ml-5 cursor-pointer h-[14px] w-[14px]"
           alt=""
         />
       </div>
