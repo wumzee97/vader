@@ -1,6 +1,6 @@
 <template>
   
-  <carousel :autoplay="4000" class="py-0 h-auto">
+  <carousel :autoplay="6000" class="py-0 h-auto">
     <slide class="w-screen h-full" v-for="(movie, index) in movies" :key="index">
       <div class="flex justify-center items-center h-full">
         <div
@@ -33,7 +33,7 @@
                 {{ movie.overview }}
               </p>
               <div class="flex">
-                <button
+                <button @click="getVideos(movie.id)"
                   class="h-[44px] w-[146px] font-medium flex items-center justify-center bg-[#3772FF] rounded-md"
                 >
                   <img src="../assets/play-circle.svg" alt="" />
@@ -62,19 +62,45 @@
       <pagination />
     </template> -->
   </carousel>
+  <modal v-if="isOpen" :isOpen="isOpen" @close="isOpen = false">
+      <iframe
+        width="100%"
+        height="315"
+        :src="`https://www.youtube.com/embed/${video}?autoplay=1`"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+      ></iframe>
+    </modal>
 </template>
 
 <script setup>
 import { ref, onMounted, computed } from "vue";
+import axios from 'axios'
 
 import Overlay from "../components/Overlay.vue";
 import "vue3-carousel/dist/carousel.css";
+import Modal from "./Modal.vue";
 import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
 components: {
-  Overlay, Carousel, Slide, Pagination, Navigation;
+ Modal, Overlay, Carousel, Slide, Pagination, Navigation;
 }
+const isOpen = ref(false)
+const video = ref(null)
 
 const props = defineProps(["showlearnmore", 'movies']);
+
+const getVideos = async (id) => {
+  await axios
+    .get(
+      `https://api.themoviedb.org/3/movie/${id}/videos?api_key=5035e33b7502ccacbf835c91b3097af3`
+    )
+    .then((response) => {
+      video.value = response.data.results[0].key
+      isOpen.value = true
+    });
+};
 </script>
 
 <style>
